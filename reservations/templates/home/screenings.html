@@ -1,0 +1,37 @@
+{% extends 'home/base.html' %}
+{% block content %}
+
+    {% if movies %}
+        {% for movie in movies %}
+            <h1>Screenings for {{ movie.title }}</h1>
+        {% endfor %}
+    {% else %}
+        <h1>All screenings</h1>
+    {% endif %}
+
+    <div class="row">
+        {% for s in screenings %}
+            <div class="col-sm-6 col-md-3 col-lg-2">
+                <div class="thumbnail" align="middle" style="width:250px;">
+                    <p>{{ s.get_view_day_display }}</p>
+                    <p>{{ s.get_view_hour_display }}</p>
+                    <p>Room{{ s.room_nr }}</p>
+                    <h3>{{ s.movie.title }}</h3>
+                    <img src="{{ s.movie.poster_url }}" alt="" style="height: 150px">
+                    <div class="caption">
+                        <form action="{% url 'reservations:tickets' %}" method="post">
+{#                        <form action="/tickets" method="post">#}
+                            {% csrf_token %}
+                            <input type="number" name="screening_id" value="{{ s.id }}" hidden>
+{#                            <input type="number" name="user_id" value="1" hidden>#}
+                            <div style="padding: 15px 30px;"><input type="number" name="how_many" value="1"
+                                                                    placeholder="How many"></div>
+                            <input type="submit" class="btn btn-primary btn-md  btn-huge" value="Buy tickets">
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+{% endblock content %}

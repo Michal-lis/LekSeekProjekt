@@ -1,0 +1,9 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    {%  for screening in screenings %}
+    <h2> Probny HTML {{ screening.movie }}!</h2>
+    {% endfor %}
+    <h2> Probny HTML {{ movies.title }}!</h2>
+
+{% endblock%}

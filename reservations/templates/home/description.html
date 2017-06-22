@@ -1,0 +1,18 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+    <div class="container" align="middle" padding="50px">
+        <div class="page-header">
+            <h2>{{ movie.title }}</h2>
+        </div>
+    </div>
+<div style="width: 30%; float: left" align="middle">
+<p><img src="{{ movie.poster_url }}" width="300px"></p>
+</div>
+<div style="width: 70% ; float: right" align="middle">
+    <h3> Directed by {{ movie.director }}</h3>
+    <h4> {{ movie.date }}</h4>
+    {{ movie.description|safe }}
+</div>
+
+{% endblock %}

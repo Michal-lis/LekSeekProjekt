@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}  <!--staticfiles czyli pliki css i obrazki-->
+
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--zoom level do 1 i szerokosc strony do szerokosci urzadzenia-->
+
+    <title>Lekseek</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'personal/css/bootstrap.min.css' %}" type="text/css"/>
+    {# bo mamy juz boostrapa sciagnietego #}
+
+    <style type="text/css">
+        html,
+        body {
+            height: 100%
+        }
+
+        #websiteTitle {
+            font-size: 8em;
+            vertical-align: middle;
+            font-family: 'Pacifico', cursive;
+            padding-left: 15px;
+            color: #191970;
+            background-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="body" style="background-color:#f6f6f6">
+<div class="container-fluid" style="min-height:150%; ">
+    <div class="row">
+        <div class="col-sm-2">
+            <br>
+            <center>
+                <img src="{% static 'personal/img/profile.jpg' %}" class="img-circle" style='max-height:300px;'
+                     alt="face">
+            </center>
+        </div>
+        <div class="col-sm-10">
+            <br>
+            <div class="container-fluid" align="middle">
+                <div class="jumbotron" style="text-align: center; border-radius: 350px; width: 900px">
+                    <span id="websiteTitle"> LekSeek Cinema </span>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-2">
+                <br>
+
+                <br>
+                <!-- Great, til you resize. -->
+                <!--<div class="well bs-sidebar affix" id="sidebar" style="background-color:#fff">-->
+                <div class="well bs-sidebar" id="sidebar" style="background-color:#fff ;font-size: 20px">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href='/'>Main page</a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href='/accounts/logout/'>Logout</a></li>
+                        {% else %}
+                            <li><a href='/accounts/'>Accounts</a></li>
+                        {% endif %}
+                        <li><a href='/movies/'>List of films with description</a></li>
+                        <li><a href='/tickets'>Your tickets</a></li>
+                        <li><a href='/contact'>Contact</a></li>
+
+                </div> <!--well bs-sidebar affix-->
+            </div> <!--col-sm-2-->
+            <div class="col-sm-10">
+
+                <div class='container-fluid'>
+                    <br><br>
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        Footer
+    </footer>
+
+</body>
+
+</html>

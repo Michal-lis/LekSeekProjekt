@@ -1,0 +1,21 @@
+{% extends "home/base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container" align="middle" padding="50px" style="font-size: 20px">
+        <div class="page-header">
+            <h2>Logging in.</h2>
+        </div>
+        <form action="/accounts/auth/" method="post">
+            {% csrf_token %}<!--Metodą post dostaniemy się do adresu URL accounts/auth/, który wykorzystuje następnie metodę z view-->
+            <label for="username">User name:</label>
+            <input type="text" name="username" value="" id="username">
+            <label for="password">Password:</label>
+            <input type="password" name="password" value="" id="password">
+
+            <input type="submit" class="btn btn-primary btn-lg  btn-huge" style="padding: 15px 30px;" value="login"/>
+        </form>
+    </div>
+    <div class="imgcontainer" align="middle">
+        <img src="{% static 'personal/img/america.jpg' %}" class="avatar" width="800">
+    </div>
+{% endblock %}

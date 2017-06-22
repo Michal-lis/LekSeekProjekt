@@ -1,0 +1,32 @@
+{% extends "home/base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container" align="middle" padding="50px">
+        <div class="page-header">
+            <h2>In order to purchase tickets for the screenings please log in.</h2>
+        </div>
+    </div>
+    <div align="middle">
+        <br>
+        <br>
+        <!-- Great, til you resize. -->
+        <!--<div class="well bs-sidebar affix" id="sidebar" style="background-color:#fff">-->
+        <a href='login/'>
+            <button type="button" class="btn btn-primary btn-lg btn-huge" style="padding: 15px 30px;">Login</button>
+        </a>
+        <div class="container" align="middle" padding="50px">
+            <div class="page-header">
+                <h2>Do not have an account yet?</h2>
+            </div>
+        </div>
+        <br>
+        <br>
+        <a href='register/'>
+            <button type="button" class="btn btn-primary btn-lg  btn-huge" style="padding: 15px 30px;">Register</button>
+        </a>
+
+
+    </div> <!--well bs-sidebar affix-->
+    </div>
+
+{% endblock %}

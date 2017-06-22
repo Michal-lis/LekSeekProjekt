@@ -1,0 +1,15 @@
+{%  extends 'home/base.html' %}
+
+{%  block content %}
+    <div style="font-size: 20px">
+<form action="/accounts/register/" method="post">
+{% csrf_token %}
+{{ forms }}
+    <br>
+    <div style="text-align: center">
+<input type="submit" class="btn btn-primary btn-lg  btn-huge " style="padding: 15px 30px;" value="Register"/>
+    </div>
+</form>
+    </div>
+
+{%  endblock %}

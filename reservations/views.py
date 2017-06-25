@@ -21,22 +21,31 @@ def moviesview(request):
 
 
 def ticketsview(request):
-    user = User.objects.get(id=request.user.id)
-    if request.method == 'GET':
-        # name = request.GET.get('username')  # jak to zmienić na current user?
-        tickets = Ticket.objects.filter(user=user)  # jak to zmienić na current user?
-        return render(request, 'home/tickets.html', {'tickets': tickets})
-    elif request.method == 'POST':
-        screening_id = int(request.POST.get('screening_id'))
-        # user_id = int(request.POST.get('user_id'))
-        how_many = int(request.POST.get('how_many'))
-        screening = Screening.objects.get(id=screening_id)
-        # user = User.objects.get(id=user_id)
-        for _ in range(how_many):
-            seat = random.randint(1, 100)
-            Ticket(screening=screening, user=user, seat=str(seat)).save()
-        return HttpResponseRedirect(reverse('reservations:tickets'))
-        # return HttpResponseRedirect('/coupons')
+    if request.user.is_authenticated():
+        user = User.objects.get(id=request.user.id)
+        if request.method == 'GET':
+            tickets = Ticket.objects.filter(user=user)
+            return render(request, 'home/tickets.html', {'tickets': tickets})
+        elif request.method == 'POST':
+            screening_id = int(request.POST.get('screening_id'))
+            how_many = int(request.POST.get('how_many'))
+            screening = Screening.objects.get(id=screening_id)
+            for _ in range(how_many):
+                # seat = random.randint(1, 100)
+                Ticket(screening=screening, user=user).save()
+            return HttpResponseRedirect(reverse('reservations:tickets'))
+    else:
+        return render(request, 'home/tickets.html')
+
+
+def ticketcancel_view(request):
+    if request.method == 'POST':
+        ticket_id = int(request.POST.get('ticket_id'))
+        ticket_to_delete = Ticket.objects.get(id=ticket_id)
+        ticket_to_delete.delete()
+        return HttpResponseRedirect('/tickets')
+        # tickets = Ticket.objects.filter(user=user)
+        # return render(request, 'home/tickets.html', {'tickets': tickets})
 
 
 def contactview(request):
@@ -99,8 +108,7 @@ def registersuccess_view(request):
 
 
 def screening_view(request):
-    movie_id = request.GET.get('movie_id',
-                               default=1)  # bierze movie id z requesta a defacto z adresu url request.GET jest słownikiem
+    movie_id = request.GET.get('movie_id', default=1)
     if movie_id:
         movies = Movie.objects.filter(id=movie_id)  # queryset zeby wziac movie z tym id
         screenings = Screening.objects.filter(movie=movies)  # wyswietl screnings tego filmu

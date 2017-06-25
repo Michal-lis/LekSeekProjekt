@@ -8,10 +8,10 @@
             <h1>All movies played in our cinema:</h1>
         </div>
     </div>
-    <div>
+    <div >
         {% for movie in movies %}
-            <div class="clearfix visible-sm"></div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="clearfix visible-sm" ></div>
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" >
                 <div class="thumbnail">
                     <img src="{{ movie.poster_url }}" alt="" style="width: 350px">
                     <div class="caption" align="middle">
@@ -19,10 +19,6 @@
                         <h2>{{ movie.title }}</h2>
                         <h4>{{ movie.director }} </h4>
                         <h4>{{ movie.date }}</h4>
-                        </p>
-                        {#                        <p><a href="{% url 'screenings' %}?film_id={{ movie.id }}" class="btn btn-primary"#}
-                        {#                              role="button">View#}
-                        {#                            screenings</a>#}
                         <div class="btn-group btn-group-md btn-group-primary" role="group">
                             <a href="{{ movie.id }}"> <button type="button" class="btn btn-primary">Film Description</button></a>
                             <a href="/screenings?movie_id={{ movie.id }}"> <button type="button" class="btn btn-primary">Get tickets</button></a>

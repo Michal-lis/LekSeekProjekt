@@ -12,12 +12,14 @@
     <title>Lekseek</title>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'personal/css/bootstrap.min.css' %}" type="text/css"/>
-    {# bo mamy juz boostrapa sciagnietego #}
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" language="javascript" src='{% static 'personal/js/clock.js' %}'></script>
+    <script type="text/javascript" language="javascript" src='{% static 'personal/js/slider.js' %}'></script>
     <style type="text/css">
         html,
         body {
             height: 100%
+
         }
 
         #websiteTitle {
@@ -28,10 +30,38 @@
             color: #191970;
             background-color: transparent;
         }
+
+        footer {
+            width: 100%;
+            background-color: #DCDCDC;
+            padding: 10px 0px;
+            text-align: center;
+            border-radius: 350px;
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            font-size: 30px;
+        }
+
+        .fa:hover {
+            opacity: 0.7;
+        }
+
+        .fa-facebook {
+            background: #3B5998;
+            color: white;
+        }
+
+        .fa-twitter {
+            background: #55ACEE;
+            color: white;
+        }
+
     </style>
 </head>
 
-<body class="body" style="background-color:#f6f6f6">
+<body class="body" style="background-color:#f6f6f6" onload="odliczanie();zmienslajd();">
 <div class="container-fluid" style="min-height:150%; ">
     <div class="row">
         <div class="col-sm-2">
@@ -40,51 +70,61 @@
                 <img src="{% static 'personal/img/profile.jpg' %}" class="img-circle" style='max-height:300px;'
                      alt="face">
             </center>
+            <br>
+            <br>
+            <div id="clock" style="font-size: 20px; text-align: center"></div>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-8">
             <br>
             <div class="container-fluid" align="middle">
-                <div class="jumbotron" style="text-align: center; border-radius: 350px; width: 900px">
+                <div class="jumbotron"
+                     style="text-align: center; border-radius: 350px; max-width: 900px; color: #DCDCDC;">
                     <span id="websiteTitle"> LekSeek Cinema </span>
                 </div>
             </div>
         </div>
-        <hr>
+        <div class="col-sm-2" class="img-circle" id="slider">
+        </div>
+    </div>
+    <hr>
 
-        <div class="row">
-            <div class="col-sm-2">
-                <br>
+    <div class="row">
+        <div class="col-sm-2">
+            <br>
 
-                <br>
-                <!-- Great, til you resize. -->
-                <!--<div class="well bs-sidebar affix" id="sidebar" style="background-color:#fff">-->
-                <div class="well bs-sidebar" id="sidebar" style="background-color:#fff ;font-size: 20px">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href='/'>Main page</a></li>
-                        {% if user.is_authenticated %}
-                            <li><a href='/accounts/logout/'>Logout</a></li>
-                        {% else %}
-                            <li><a href='/accounts/'>Accounts</a></li>
-                        {% endif %}
-                        <li><a href='/movies/'>List of films with description</a></li>
-                        <li><a href='/tickets'>Your tickets</a></li>
-                        <li><a href='/contact'>Contact</a></li>
+            <br>
+            <!-- Great, til you resize. -->
+            <!--<div class="well bs-sidebar affix" id="sidebar" style="background-color:#fff">-->
+            <div class="well bs-sidebar" id="sidebar" style="background-color:#fff ;font-size: 20px">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><a href='/'>Main page</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href='/accounts/logout/'>Logout</a></li>
+                    {% else %}
+                        <li><a href='/accounts/'>Accounts</a></li>
+                    {% endif %}
+                    <li><a href='/movies/'>List of films with description</a></li>
+                    <li><a href='/tickets'>Your tickets</a></li>
+                    <li><a href='/contact'>Contact</a></li>
 
-                </div> <!--well bs-sidebar affix-->
-            </div> <!--col-sm-2-->
-            <div class="col-sm-10">
-
-                <div class='container-fluid'>
-                    <br><br>
-                    {% block content %}
-                    {% endblock %}
-                </div>
+            </div>
+        </div>
+        <div class="col-sm-10" style="bottom:50px">
+            <div class='container-fluid'>
+                <br><br>
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
     </div>
-    <footer>
-        Footer
-    </footer>
+</div>
+<footer>
+    <a href="#" class="fa fa-facebook"></a>
+    <a href="#" class="fa fa-twitter"></a>
+    <a href="#" class="fa fa-youtube"></a>
+    <a href="#" class="fa fa-instagram"></a>
+    <a href="#" class="fa fa-rss"></a>
+</footer>
 
 </body>
 

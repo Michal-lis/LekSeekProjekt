@@ -18,8 +18,10 @@ urlpatterns = [
         name="movie_description"),
     url(r'^screenings', views.screening_view, name='screenings'),
     url(r'^tickets/$', views.ticketsview, name="tickets"),
+    url(r'^vue$', views.vue_view, name="vue"),
     url(r'^tickets/cancel', views.ticketcancel_view, name="ticket_cancel"),
     url(r'^contact', views.contactview, name="contact"),
+    url(r'^thegame', views.contactview, name="contact"),
     url(r'^$', views.homeview, name="home"),
     url(r'^home/$', views.homeview, name="home1"),
 ]

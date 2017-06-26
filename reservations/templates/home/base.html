@@ -2,69 +2,26 @@
 <html lang="en">
 <head>
     {% load staticfiles %}  <!--staticfiles czyli pliki css i obrazki-->
-
-
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <!--zoom level do 1 i szerokosc strony do szerokosci urzadzenia-->
-
     <title>Lekseek</title>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'personal/css/bootstrap.min.css' %}" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'personal/css/style.css' %}" type="text/css"/>
+    <script type="text/javascript" language="javascript" src='{% static 'personal/js/jquery-3.2.1.min.js' %}'></script>
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/clock.js' %}'></script>
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/slider.js' %}'></script>
-    <style type="text/css">
-        html,
-        body {
-            height: 100%
-
-        }
-
-        #websiteTitle {
-            font-size: 8em;
-            vertical-align: middle;
-            font-family: 'Pacifico', cursive;
-            padding-left: 15px;
-            color: #191970;
-            background-color: transparent;
-        }
-
-        footer {
-            width: 100%;
-            background-color: #DCDCDC;
-            padding: 10px 0px;
-            text-align: center;
-            border-radius: 350px;
-            position: fixed;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            font-size: 30px;
-        }
-
-        .fa:hover {
-            opacity: 0.7;
-        }
-
-        .fa-facebook {
-            background: #3B5998;
-            color: white;
-        }
-
-        .fa-twitter {
-            background: #55ACEE;
-            color: white;
-        }
-
-    </style>
+    <script type="text/javascript" language="javascript" src='{% static 'personal/js/vue.js' %}'></script>
+    <script type="text/javascript" language="javascript" src='{% static 'personal/js/filmlistvue.js' %}'></script>
 </head>
 
 <body class="body" style="background-color:#f6f6f6" onload="odliczanie();zmienslajd();">
-<div class="container-fluid" style="min-height:150%; ">
+<div class="container-fluid" style="min-height:150%; margin-left: auto; margin-right: auto">
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2 col-lg-2">
             <br>
             <center>
                 <img src="{% static 'personal/img/profile.jpg' %}" class="img-circle" style='max-height:300px;'
@@ -74,7 +31,7 @@
             <br>
             <div id="clock" style="font-size: 20px; text-align: center"></div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-sm-10 col-lg-10">
             <br>
             <div class="container-fluid" align="middle">
                 <div class="jumbotron"
@@ -82,9 +39,9 @@
                     <span id="websiteTitle"> LekSeek Cinema </span>
                 </div>
             </div>
+
         </div>
-        <div class="col-sm-2" class="img-circle" id="slider">
-        </div>
+
     </div>
     <hr>
 
@@ -104,7 +61,9 @@
                         <li><a href='/accounts/'>Accounts</a></li>
                     {% endif %}
                     <li><a href='/movies/'>List of films with description</a></li>
+                    <li><a href='/vue'>Vue.js</a></li>
                     <li><a href='/tickets'>Your tickets</a></li>
+                    <li><a href='/thegame'>The Game</a></li>
                     <li><a href='/contact'>Contact</a></li>
 
             </div>

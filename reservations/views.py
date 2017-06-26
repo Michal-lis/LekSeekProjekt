@@ -119,3 +119,7 @@ def screening_view(request):
                   'home/screenings.html',
                   dict(screenings=screenings,
                        movies=movies))  # screenings i movie to dwa przesyłane contexty, czyli słownikopodobne obiekty
+
+
+def vue_view(request):
+    return render(request, 'home/vue.html')

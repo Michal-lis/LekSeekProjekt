@@ -19,7 +19,7 @@ function zmienslajd() {
     var plik = "<img src=static/personal/img/slajd" + number + ".png/>";
     document.getElementById("slider").innerHTML = plik;
     $("#slider").fadeIn(500);
-    timer1 = setTimeout("schowaj()", 7500);
-    timer2 = setTimeout("zmienslajd()", 8000);
+    timer1 = setTimeout("schowaj()", 3500);
+    timer2 = setTimeout("zmienslajd()", 4000);
 
 }

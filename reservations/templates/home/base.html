@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load staticfiles %}  <!--staticfiles czyli pliki css i obrazki-->
+    {% load staticfiles %}
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
@@ -10,6 +10,8 @@
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'personal/css/bootstrap.min.css' %}" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'personal/css/bootstrap.min.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'personal/css/style.css' %}" type="text/css"/>
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/jquery-3.2.1.min.js' %}'></script>
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/clock.js' %}'></script>
@@ -51,7 +53,7 @@
         <div class="col-sm-2">
             <br>
             <br>
-            <div class="well bs-sidebar" id="sidebar" style="background-color:#fff ;font-size: 20px" >
+            <div class="well bs-sidebar" id="sidebar" style="background-color:#fff ;font-size: 20px">
                 <ul class="nav nav-pills nav-stacked">
                     <li><a href='/'>Main page</a></li>
                     {% if user.is_authenticated %}
@@ -62,13 +64,13 @@
                     <li><a href='/movies/'>List of films with description</a></li>
                     <li><a href='/tickets'>Your tickets</a></li>
                     <li><a href='/ajax'>Leave an opinion (AJAX)</a></li>
-                <li><a href='/vueopinion'>Leave an opinion (Vue.js)</a></li>
+                    <li><a href='/vueopinion'>Leave an opinion (Vue.js)</a></li>
                     <li><a href='/thegame'>The Game(jQuery)</a></li>
                     <li><a href='/contact'>Contact</a></li>
 
             </div>
         </div>
-        <div class="col-sm-10" style="bottom:50px; margin-right: auto; margin-left: auto;" >
+        <div class="col-sm-10" style="bottom:50px; margin-right: auto; margin-left: auto;">
             <div class='container-fluid'>
                 <br><br>
                 {% block content %}
@@ -85,10 +87,11 @@
     <a href="#" class="fa fa-rss"></a>
 </footer>
 <script src="{% static 'personal/js/bootstrap.min.js' %}"></script>
-    <!-- Vue.JS -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
-    <script type="text/javascript" src="{% static 'personal/js/commentvue.js' %}"></script>
+<!-- Vue.JS -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+<script type="text/javascript" src="{% static 'personal/js/commentvue.js' %}"></script>
 </body>
 
 

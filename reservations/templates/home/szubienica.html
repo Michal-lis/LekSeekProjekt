@@ -1,0 +1,104 @@
+{% extends "home/base.html" %}
+
+{% block nav %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'personal/css/poprawka.css' %}" type="text/css"/>
+{%  endblock %}
+{% block content %}
+
+    <div class="container" align="middle" padding="50px" style="font-size: 20px">
+        <div class="page-header">
+            <h2>Try playing in our game - The Hangman.</h2><br/>
+            <h4>You have to guess one of our cinema's films' title. <br/>Every month the man with the highest score (so
+                obviously the lowest number of missed shots) wins free tickets!</h4><br/>
+        </div>
+
+        <div id="pojemnik">
+            <div id="plansza"></div>
+            <div id="szubienica">
+                <img src="{% static "personal/img/s0.jpg" %}" alt=""/>
+            </div>
+            <div id="alfabet"></div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <script>
+        var haslo = "Biutiful";
+        haslo = haslo.toUpperCase();
+
+        var dlugosc = haslo.length;//dlugosc hasla
+
+        var counter = 0;//liczba skuch
+        var wincount = 0;
+        var haslo1 = "";
+
+        for (i = 0; i < dlugosc; i++) {
+            if (haslo.charAt(i) === " ") haslo1 += " ";//nie mozemy stosowac notacji slowo[i] bo w JS literki slowa nie są ustawione w pamięci RAM w komórkach bezpośrednio obok siebie!
+            else haslo1 += "-";
+        }
+
+        function wypiszhaslo() {
+            document.getElementById("plansza").innerHTML = haslo1;
+        }
+
+        window.onload = start;
+
+        var litery = "AĄBCćDEĘFGHIJKLłMNńOóPQRSśTUVWXYZźż";
+        litery = litery.toUpperCase();
+
+        function start() {
+            var tresc_diva = "";
+            for (i = 0; i <= 34; i++) {
+                var element = "lit" + i;
+                tresc_diva = tresc_diva + '<div class="litera" onclick="sprawdz(' + i + ')" id="' + element + '">' + litery.charAt(i) + "</div>";
+                if (i === 6) tresc_diva = tresc_diva + '<div style="clear both;"></div>'
+            }
+            document.getElementById("alfabet").innerHTML = tresc_diva;
+            wypiszhaslo();
+        }
+
+        String.prototype.ustawZnak = function (miejsce, znak) {
+            if (miejsce > this.length - 1)return this.toString();
+            else if (miejsce < 0)return this.toString();
+            else return this.substr(0, miejsce) + znak + this.substr(miejsce + 1);
+        }
+
+        function sprawdz(nr) {
+            var trafiona = false;
+            for (i = 0; i < dlugosc; i++) {
+                if (haslo.charAt(i) === litery.charAt(nr)) {
+                    haslo1 = haslo1.ustawZnak(i, litery.charAt(nr));
+                    trafiona = true;
+                }
+            }
+            var element = "lit" + nr;
+            if (trafiona === true) {
+                document.getElementById(element).style.background = "#003300";//zmieniamy style borderu!!
+                document.getElementById(element).style.color = "#00C000";
+                document.getElementById(element).style.border = "3px solid #00C000";
+                document.getElementById(element).style.cursor = "default";
+                wypiszhaslo();
+            }
+            else {
+                counter = counter + 1;
+                document.getElementById(element).style.background = "#330000";//zmieniamy style borderu!!
+                document.getElementById(element).style.color = "#C00000";
+                document.getElementById(element).style.border = "3px solid #C00000";
+                document.getElementById(element).style.cursor = "default";
+                document.getElementById(element).setAttribute("onclick", 'none');//rozbrajanie przycisku z onclicka!
+
+                if (counter < 10) {
+                    document.getElementById("szubienica").innerHTML = '<img src="static/personal/img/s' + counter + '.jpg\"  alt=""/>';
+                }
+                else {
+                    document.getElementById("alfabet").innerHTML = "You lose! <br/><br/><span class='reset' onclick='location.reload()'>Once again?</span>";
+                }
+            }
+            //wygrana
+            if (haslo === haslo1) {
+                document.getElementById("alfabet").innerHTML = "You win! <br/><br/><span class='reset' onclick='location.reload()'>Once again?</span>";
+            }
+        }
+    </script>
+{% endblock %}

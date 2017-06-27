@@ -5,7 +5,7 @@ from django.template.response import TemplateResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
-from django.core import serializers #to jest potzrebne do wyswietlania przy metodzie Ajax
+from django.core import serializers  # to jest potzrebne do wyswietlania przy metodzie Ajax
 from reservations.models import Evaluation
 from django.contrib.auth.models import User
 from .serializers import CommentsSerializer
@@ -159,16 +159,22 @@ def evaluateview(request):
 
 
 def vue_comment_view(request):
-    context={}
-    context['comments']=Evaluation.objects.all()
-
-    html=TemplateResponse(request,
-                          'home/evaluationVUElist.html',
-                          context)
+    context = {}
+    context['comments'] = Evaluation.objects.all()
+    context['movies'] = Movie.objects.all()
+    html = TemplateResponse(request,
+                            'home/evaluationVUElist.html',
+                            context)
     return HttpResponse(html.render())
 
 
 class CommentViewSet(viewsets.ModelViewSet):
     # tutaj tworzony jest endpoint pozwalający wyświetlać komentarze
-    queryset=Evaluation.objects.all()
-    serializer_class=CommentsSerializer
+    queryset = Evaluation.objects.all()
+    serializer_class = CommentsSerializer
+
+
+def thegame_view(request):
+    movies=Movie.objects.all()
+    return render(request, 'home/szubienica.html',
+                  {"movies": movies})

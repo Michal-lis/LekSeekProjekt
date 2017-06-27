@@ -1,64 +1,65 @@
 {% extends "home/base.html" %}
 
 {% block content %}
+<div id="app">
     <div class="container" align="middle" padding="50px" style="font-size: 20px"
          xmlns:v-on="http://www.w3.org/1999/xhtml">
-    <div class="page-header">
-        <h2>Please take a second to leave us feedback.</h2>
-    </div>
-
-    <div style="text-align: center">
-        <form id="evaluation_form">{% csrf_token %}
-            <label for="name">Your name:</label>
-            <input type="text" id="name"/>
-            <br/>
-            <br/>
-            <label for="mark">How would you evaluate our cinema?</label>
-            <select id="mark" name="mark" style="font-size: 15px">
-                <option value="6">&starf;&starf;&starf;&starf;&starf;&starf;</option>
-                <option value="5">&starf;&starf;&starf;&starf;&starf;</option>
-                <option value="4">&starf;&starf;&starf;&starf;</option>
-                <option value="3">&starf;&starf;&starf;</option>
-                <option value="2">&starf;&starf;</option>
-                <option value="1">&starf;</option>
-            </select>
-
-            <br/>
-            <br/>
-            <label for="movie">Which movie did you see in our cinema?</label>
-            <br/>
-            <select id="movie" name="movie">
-                {% for movie in movies %}
-                    <option value="{{ movie }}">{{ movie }}</option>
-                {% endfor %}
-            </select>
-            <br/>
-            <br/>
-            <br/>
-            <div style="text-align: center">
-                <textarea id="opinion" name="opinion" cols="70" rows="7" onfocus="clearContents(this);"> What do you think about our cinema?
-            </textarea>
-            </div>
-            <br/>
-            <input type="Submit" v-on:click="addComment()" class="btn btn-primary btn-lg  btn-huge"
-                   style="padding: 15px 30px;"
-                   value="SUBMIT">
-        </form>
-    </div>
-    <div style="text-align: center">
         <div class="page-header">
-            <h2 style="text-decoration: underline;">All the comments:</h2>
-            <br/>
-            <p v-if="comments.length==0">Sorry, there are no comments</p>
-            <div id="update-holder" v-for="comment in comments">
+            <h2>Please take a second to leave us feedback.</h2>
+        </div>
+
+        <div style="text-align: center">
+            <form id="evaluation_form">{% csrf_token %}
+                <label for="name">Your name:</label>
+                <input type="text" id="name" v-model="author"/>
                 <br/>
-                {% for ev in evaluations %}
+                <br/>
+                <label for="mark">How would you evaluate our cinema?</label>
+                <select id="mark" name="mark" style="font-size: 15px" v-model="mark">
+                    <option value="6">&starf;&starf;&starf;&starf;&starf;&starf;</option>
+                    <option value="5">&starf;&starf;&starf;&starf;&starf;</option>
+                    <option value="4">&starf;&starf;&starf;&starf;</option>
+                    <option value="3">&starf;&starf;&starf;</option>
+                    <option value="2">&starf;&starf;</option>
+                    <option value="1">&starf;</option>
+                </select>
+
+                <br/>
+                <br/>
+                <label for="movie">Which movie did you see in our cinema?</label>
+                <br/>
+                <select id="movie" name="movie" v-model="seans">
+                    {% for movie in movies %}
+                        <option value="{{ movie }}">{{ movie }}</option>
+                    {% endfor %}
+                </select>
+                <br/>
+                <br/>
+                <br/>
+                <div style="text-align: center">
+                <textarea id="opinion" name="opinion" v-model="opinion" cols="70" rows="7"
+                          onfocus="clearContents(this);"> What do you think about our cinema?
+            </textarea>
+                </div>
+                <br/>
+                <input type="Submit" v-on:click="addComment()" class="btn btn-primary btn-lg  btn-huge"
+                       style="padding: 15px 30px;"
+                       value="SUBMIT">
+            </form>
+        </div>
+        <div style="text-align: center">
+            <div class="page-header">
+                <h2 style="text-decoration: underline;">All the comments:</h2>
+                <br/>
+                <p v-if="comments.length===0">Sorry, there are no comments</p>
+                <div id="update-holder" v-for="comment in comments">
+                    <br/>
                     <div>[[ comment.author ]] on [[ comment.timestamp ]] wrote:<br/>
                         "[[ comment.opinion ]]"<br/><br/></div>
-
-                {% endfor %}
+                </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
 

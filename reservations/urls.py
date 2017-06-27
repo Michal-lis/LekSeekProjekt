@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^vue$', views.vue_view, name="vue"),
     url(r'^tickets/cancel', views.ticketcancel_view, name="ticket_cancel"),
     url(r'^contact', views.contactview, name="contact"),
-    url(r'^thegame', views.contactview, name="contact"),
+    url(r'^thegame', views.thegame_view, name="contact"),
     url(r'^ajax', views.ajaxview, name="ajax"),
     url(r'^vueopinion', views.vue_comment_view, name="ajax"),
     url(r'^api/',include(router.urls)),

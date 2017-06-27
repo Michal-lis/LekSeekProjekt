@@ -10,9 +10,11 @@
 <p><img src="{{ movie.poster_url }}" width="300px"></p>
 </div>
 <div style="width: 70% ; float: right" align="middle">
-    <h3> Directed by {{ movie.director }}</h3>
-    <h4> {{ movie.date }}</h4>
-    {{ movie.description|safe }}
+    <h2> Directed by {{ movie.director }}</h2>
+    <h3> {{ movie.date }}</h3>
+    <div style="text-align: justify; text-indent: 5em; font-size: 20px; margin-right:50px">
+    <tab>{{ movie.description|safe }}</div>
+    </div>
 </div>
 
 {% endblock %}

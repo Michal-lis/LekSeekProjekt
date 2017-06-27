@@ -1,7 +1,14 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from reservations import views
 from django.views.generic import DetailView
 from .models import Movie
+from django.contrib import admin
+from rest_framework import routers
+
+#routery są po to żeby automatyczne zdefiniować URL conf.
+router=routers.DefaultRouter()
+router.register(r'comments', views.CommentViewSet)
+
 
 urlpatterns = [
     # urls for logging in
@@ -22,6 +29,10 @@ urlpatterns = [
     url(r'^tickets/cancel', views.ticketcancel_view, name="ticket_cancel"),
     url(r'^contact', views.contactview, name="contact"),
     url(r'^thegame', views.contactview, name="contact"),
+    url(r'^ajax', views.ajaxview, name="ajax"),
+    url(r'^vueopinion', views.vue_comment_view, name="ajax"),
+    url(r'^api/',include(router.urls)),
+    url(r'^evaluate', views.evaluateview, name="evaluate"),
     url(r'^$', views.homeview, name="home"),
     url(r'^home/$', views.homeview, name="home1"),
 ]

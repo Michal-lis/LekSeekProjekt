@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib import admin
+from django.db.models import permalink
 
 
 class Movie(models.Model):
@@ -97,3 +99,34 @@ class Ticket(models.Model):
 
     def __str__(self):
         return str(self.screening) + str(self.user)
+
+
+class Evaluation(models.Model):
+    MARK_CHOICES = (
+        (1, "*"),
+        (2, "**"),
+        (3, "***"),
+        (4, "****"),
+        (5, "*****"),
+        (6, "******"),
+    )
+    opinion = models.TextField(max_length=1000)
+    seans = models.ForeignKey(Movie, default=1)
+    author = models.TextField(max_length=100, default="Anonumous")
+    mark = models.IntegerField(choices=MARK_CHOICES, default=6)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "evaluations"
+        ordering = ('-timestamp',)
+
+    def __str__(self):
+        return "Opinion by " + str(self.author) + " from " + str(self.timestamp)
+
+    @permalink
+    def get_absolute_url(self):
+        return ('django.views.generic.list_detail.object_detail', None, {'object_id': self.id})
+
+    class EvaluationAdmin(admin.ModelAdmin):
+        list_display = ('__str__', 'text', 'mark', 'seans')
+        list_filter = ('timestamp', 'author')

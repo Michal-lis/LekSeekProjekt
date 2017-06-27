@@ -1,13 +1,15 @@
-import random
-
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.template.context_processors import csrf
+from django.template.response import TemplateResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
+from django.core import serializers #to jest potzrebne do wyswietlania przy metodzie Ajax
+from reservations.models import Evaluation
 from django.contrib.auth.models import User
-
+from .serializers import CommentsSerializer
+from rest_framework import viewsets
 from .models import *
 
 
@@ -123,3 +125,50 @@ def screening_view(request):
 
 def vue_view(request):
     return render(request, 'home/vue.html')
+
+
+def ajaxview(request):
+    movies = Movie.objects.all()
+    evaluations = Evaluation.objects.all()
+    return render(request, 'home/ajax.html', dict(movies=movies,
+                                                  evaluations=evaluations))
+
+
+def evaluateview(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        opinion = request.POST.get('opinion')
+        mark = request.POST.get('mark')
+        title = request.POST.get('movie')
+        seans = Movie.objects.get(title=title)
+
+        Evaluation.objects.create(
+            author=name,
+            opinion=opinion,
+            mark=mark,
+            seans=seans,
+        )
+        return HttpResponse('')
+    # od tego momentu nie działa
+    else:
+        response = HttpResponse()
+        response['Content-Type'] = "text/javascript"
+        response.write(serializers.serialize("json",
+                                             Evaluation.objects.filter(pk__gt=id)))
+        return response
+
+
+def vue_comment_view(request):
+    context={}
+    context['comments']=Evaluation.objects.all()
+
+    html=TemplateResponse(request,
+                          'home/evaluationVUElist.html',
+                          context)
+    return HttpResponse(html.render())
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    # tutaj tworzony jest endpoint pozwalający wyświetlać komentarze
+    queryset=Evaluation.objects.all()
+    serializer_class=CommentsSerializer

@@ -1,13 +1,81 @@
 {% extends "home/home.html" %}
+{% block nav %}
+
+{% endblock %}
+
 
 {% block content %}
-    <div class="container" align="middle" padding="50px">
-        <div class="page-header">
-            <h2>List of films made in Vue.</h2>
-        </div>
-    </div>
+    <div id="app" xmlns="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+        {#    Czy trzeba to dołączać?#}
+        <ul>
 
-    <div id="app">
-    {{ keyword }}
+        </ul>
+        <h1><% user.name %></h1>
+        <button v-on:click="greet">Say greeting</button>
+        <input type="text" v-on:keyup.enter="pressKey">
+        <br/>
+        <br/>
+
+        <h1><% fullName %></h1>
+        <h2><% msg %></h2>
+
+
     </div>
+{% endblock %}
+
+
+
+{% block vue %}
+    {#    {% load static %}#}
+    {#    <script type="text/javascript" language="javascript" src='{% static 'personal/js/filmlistvue.js' %}'></script> #}
+    {#    Zapytaj jak zaimportowac skrypt js tak żeby widział dany element?#}
+    <script>
+        var app = new Vue({
+                el: "#app",
+                delimiters: ["<%", "%>"],
+                props: {
+                    msg: {
+                        type: String,
+                        default: "Foobar"
+                    }
+                },
+                export default{
+                    name:'users',
+            }
+                data: {
+                    return{
+                        users: [
+                            {
+                                name: "John Doe",
+                                email: "",
+                                contacted: false
+                            },
+                            {
+                                name: "Mike Wolf",
+                                email: "",
+                                contacted: false
+                            },
+                        ]
+                    }
+                },
+
+                methods: {
+                    toggleOnOff(){
+                        this.onOff = !(this.onOff)
+                    },
+                    greet: function () {
+                        alert('Hello');
+                    },
+                    pressKey: function (e) {
+                        console.log(e.target.value);
+                    }
+                },
+                computed: {
+                    fullName: function () {
+                        return this.user.firstName + ' ' + this.user.lastName;
+                    }
+                }
+            })
+        ;
+    </script>
 {% endblock %}

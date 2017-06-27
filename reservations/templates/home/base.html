@@ -9,10 +9,10 @@
     <title>Lekseek</title>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'personal/css/bootstrap.min.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'personal/css/style.css' %}" type="text/css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'personal/css/bootstrap.min.css' %}" type="text/css"/>
-    <link rel="stylesheet" href="{% static 'personal/css/style.css' %}" type="text/css"/>
+    <script type="text/javascript" language="javascript" src='{% static "personal/js/szubienica.js" %}'></script>
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/jquery-3.2.1.min.js' %}'></script>
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/clock.js' %}'></script>
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/slider.js' %}'></script>
@@ -40,7 +40,12 @@
             <div class="container-fluid" align="middle">
                 <div class="jumbotron"
                      style="text-align: center; border-radius: 350px; max-width: 900px; color: #DCDCDC;">
-                    <span id="websiteTitle"> LekSeek Cinema </span>
+                    <span style="font-size: 8em;
+    vertical-align: middle;
+    font-family: 'Pacifico', cursive;
+    padding-left: 15px;
+    color: #191970;
+    background-color: transparent;"> LekSeek Cinema </span>
                 </div>
             </div>
 
@@ -79,7 +84,16 @@
         </div>
     </div>
 </div>
-<footer>
+<footer style="width: 100%;
+    background-color: #DCDCDC;
+    padding: 10px 0px;
+    text-align: center;
+    border-radius: 350px;
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    font-size: 30px;">
     <a href="#" class="fa fa-facebook"></a>
     <a href="#" class="fa fa-twitter"></a>
     <a href="#" class="fa fa-youtube"></a>

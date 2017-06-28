@@ -1,9 +1,23 @@
 {%  extends 'home/base.html' %}
 
+{%  block nav %}
+
+    <script type="text/javascript" language="JavaScript">
+    window.alert("Please fill in the registration form according to the instructions.")
+    </script>
+
+{% endblock %}
+
+
+
 {%  block content %}
     <div style="font-size: 20px">
 <form action="/accounts/register/" method="post">
 {% csrf_token %}
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 {{ forms }}
     <br>
     <div style="text-align: center">

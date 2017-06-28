@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^vueopinion', views.vue_comment_view, name="ajax"),
     url(r'^api/',include(router.urls)),
     url(r'^evaluate', views.evaluateview, name="evaluate"),
+    url(r'^evaluate/(?P<id>\d+)/$', views.evaluateview, name="evaluateupdate"),
     url(r'^$', views.homeview, name="home"),
     url(r'^home/$', views.homeview, name="home1"),
 ]

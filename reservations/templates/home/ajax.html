@@ -2,27 +2,19 @@
 
 {% block nav %}
     <script type="text/javascript" language="JavaScript">
-        function update() {
-            update_holder = $("#update-holder");
-            most_recent = update_holder.find("div:first");
-            $.getJSON("/evaluations/" + most_recent.attr('id') + "/",
-                function (data) {
-                    jQuery.each(data, function () {
-                            update_holder.prepend('<div id="' + this.pk + '">'
-                                + '<br/>' + this.fields.author
-                                + '<br/>' + this.fields.opinion
-                                + '<br/>' + this.fields.timestamp
-                                + '<br/>' + this.fields.seans
-                                + '</div>')
-                        }
-                    )
-                });
-        }
-        $(document).ready(function () {
-            setInterval("update()", 1000);
-        })
-
-
+        {#            var update_holder = $('#update-holder');#}
+        {#            var most_recent = update_holder.find("div:first");#}
+        {#            $getJSON("/evaluate/" + most_recent.attr('id') + "/",#}
+        {#                fucntion(data){#}
+        {#                jQuery.each(data,function () {#}
+        {#                    $("#update-holder").prepend('<div id="'#}
+        {#                        +this.pk +'">'+this.fields.author#}
+        {#                        +this.fields.timestamp#}
+        {#                        +this.fields.opinion#}
+        {#                        +'<div class="clear"></div>'#}
+        {#                    );#}
+        {#                })#}
+        {#Tutaj metoda na dodawanie pojedynczego ostatniego komentarza przy pomocy jQuery biorąc id ostatniego komentarza ale coś nie działa#}
         function clearContents(element) {
             element.value = '';
         }
@@ -40,8 +32,33 @@
                 },
                 success: function () {
                     window.alert("You successfully added a comment. Thank you!")
+                    $.ajax({
+                        type: "GET",
+                        url: '/evaluate',
+                        success: function (data) {
+                            $("#update-holder").prepend();
+                            let d = JSON.parse(data);
+                            let lista = [1];
+                            for (item of d) {
+                                lista.push(item.pk);
+                            }
+                            let m = Math.max(...lista);
+                            console.log(m);
+                            let our = d.filter(item => item.pk === m)[0];
+                            console.log(our)
+                            $("#update-holder").prepend("<div id='"
+                                + our.pk + "'><br/>"
+                                + our.fields.author
+{#                                + " on "#}
+{#                                + our.fields.timestamp#}
+                                + '  has just written:<br/>"'
+                                + our.fields.opinion
+                                + '"<br/></div>');
+                        }
+                    })
                 }
             })
+
         })
     </script>
 {% endblock %}
@@ -96,9 +113,8 @@
                 <div id="update-holder">
                     <br/>
                     {% for ev in evaluations %}
-                        <div>{{ ev.author }} on {{ ev.timestamp }} wrote:<br/>
+                        <div id="{{ ev.id }}">{{ ev.author }} on {{ ev.timestamp|date:"Y-m-d H:i:s" }} wrote:<br/>
                             "{{ ev.opinion }}"<br/><br/></div>
-
                     {% endfor %}
                 </div>
             </div>

@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template.context_processors import csrf
@@ -137,24 +139,25 @@ def ajaxview(request):
 def evaluateview(request):
     if request.method == 'POST':
         name = request.POST.get('name')
+        if name == "":
+            name = "Anonymous"
         opinion = request.POST.get('opinion')
         mark = request.POST.get('mark')
         title = request.POST.get('movie')
         seans = Movie.objects.get(title=title)
-
-        Evaluation.objects.create(
-            author=name,
-            opinion=opinion,
-            mark=mark,
-            seans=seans,
-        )
-        return HttpResponse('')
-    # od tego momentu nie działa
+        if opinion != "":
+            Evaluation.objects.create(
+                author=name,
+                opinion=opinion,
+                mark=mark,
+                seans=seans,
+            )
+            return HttpResponse('')
     else:
         response = HttpResponse()
         response['Content-Type'] = "text/javascript"
         response.write(serializers.serialize("json",
-                                             Evaluation.objects.filter(pk__gt=id)))
+                                             Evaluation.objects.all()))
         return response
 
 
@@ -175,6 +178,6 @@ class CommentViewSet(viewsets.ModelViewSet):
 
 
 def thegame_view(request):
-    movies=Movie.objects.all()
+    movies = Movie.objects.all()
     return render(request, 'home/szubienica.html',
                   {"movies": movies})

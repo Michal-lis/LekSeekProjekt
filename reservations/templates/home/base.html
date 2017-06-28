@@ -9,14 +9,14 @@
     <title>Lekseek</title>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'personal/css/bootstrap.min.css' %}" type="text/css"/>
-    <link rel="stylesheet" href="{% static 'personal/css/style.css' %}" type="text/css"/>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
-    <script type="text/javascript" language="javascript" src='{% static "personal/js/szubienica.js" %}'></script>
+    <script type="text/javascript" language="javascript" src="{% static 'personal/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/jquery-3.2.1.min.js' %}'></script>
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/clock.js' %}'></script>
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/slider.js' %}'></script>
-    <script type="text/javascript" language="javascript" src='{% static 'personal/js/vue.js' %}'></script>
+    <link rel="stylesheet" href="{% static 'personal/css/style.css' %}" type="text/css"/>
     <script src="https://unpkg.com/vue"></script>
     {% block nav %}
     {% endblock %}
@@ -28,7 +28,7 @@
         <div class="col-sm-2 col-lg-2">
             <br>
             <center>
-                <img src="{% static 'personal/img/profile.jpg' %}" class="img-circle" style='max-height:300px;'
+                <img src="{% static 'personal/img/profile.jpg' %}" class="img-circle" style='max-height:350px;'
                      alt="face">
             </center>
             <br>
@@ -39,18 +39,17 @@
             <br>
             <div class="container-fluid" align="middle">
                 <div class="jumbotron"
-                     style="text-align: center; border-radius: 350px; max-width: 900px; color: #DCDCDC;">
-                    <span style="font-size: 8em;
+                     style="text-align: center; border-radius: 350px; max-width: 900px; color: #DCDCDC; margin-right: 350px">
+                    <span id="websiteTitle" style="font-size: 8em;
     vertical-align: middle;
     font-family: 'Pacifico', cursive;
     padding-left: 15px;
     color: #191970;
     background-color: transparent;"> LekSeek Cinema </span>
+                    {#                    Czemu nie działa id?#}
                 </div>
             </div>
-
         </div>
-
     </div>
     <hr>
 
@@ -68,16 +67,15 @@
                     {% endif %}
                     <li><a href='/movies/'>List of films with description</a></li>
                     <li><a href='/tickets'>Your tickets</a></li>
-                    <li><a href='/ajax'>Leave an opinion (AJAX)</a></li>
+                    <li><a href='/ajax'>Leave an opinion (jQuery+AJAX)</a></li>
                     <li><a href='/vueopinion'>Leave an opinion (Vue.js)</a></li>
                     <li><a href='/thegame'>The Game(jQuery)</a></li>
                     <li><a href='/contact'>Contact</a></li>
-
             </div>
         </div>
-        <div class="col-sm-10" style="bottom:50px; margin-right: auto; margin-left: auto;">
-            <div class='container-fluid'>
-                <br><br>
+        <div class="col-sm-10" style="bottom:90px; ">
+            <div class='container-fluid' style="margin-right: 380px">
+                <br/><br/><br/><br/><br/>
                 {% block content %}
                 {% endblock %}
             </div>
@@ -100,11 +98,9 @@
     <a href="#" class="fa fa-instagram"></a>
     <a href="#" class="fa fa-rss"></a>
 </footer>
-<script src="{% static 'personal/js/bootstrap.min.js' %}"></script>
 <!-- Vue.JS -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js"></script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
 <script type="text/javascript" src="{% static 'personal/js/commentvue.js' %}"></script>
 </body>
 

@@ -112,7 +112,7 @@ class Evaluation(models.Model):
     )
     opinion = models.TextField(max_length=1000)
     seans = models.ForeignKey(Movie, default=1)
-    author = models.TextField(max_length=100, default="Anonumous")
+    author = models.TextField(max_length=100, default="Anonymous")
     mark = models.IntegerField(choices=MARK_CHOICES, default=6)
     timestamp = models.DateTimeField(auto_now_add=True)
 

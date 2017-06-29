@@ -9,7 +9,6 @@
     <title>Lekseek</title>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'personal/css/bootstrap.min.css' %}" type="text/css"/>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
     <script type="text/javascript" language="javascript" src="{% static 'personal/js/bootstrap.min.js' %}"></script>
@@ -18,6 +17,9 @@
     <script type="text/javascript" language="javascript" src='{% static 'personal/js/slider.js' %}'></script>
     <link rel="stylesheet" href="{% static 'personal/css/style.css' %}" type="text/css"/>
     <script src="https://unpkg.com/vue"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
+    <script type="text/javascript" src="{% static 'personal/js/commentvue.js' %}"></script>
     {% block nav %}
     {% endblock %}
 </head>
@@ -46,7 +48,7 @@
     padding-left: 15px;
     color: #191970;
     background-color: transparent;"> LekSeek Cinema </span>
-                    {#                    Czemu nie działa id?#}
+                    {#Czemu nie działa id?#}
                 </div>
             </div>
         </div>
@@ -71,6 +73,7 @@
                     <li><a href='/vueopinion'>Leave an opinion (Vue.js)</a></li>
                     <li><a href='/thegame'>The Game(jQuery)</a></li>
                     <li><a href='/contact'>Contact</a></li>
+                </ul>
             </div>
         </div>
         <div class="col-sm-10" style="bottom:90px; ">
@@ -98,10 +101,6 @@
     <a href="#" class="fa fa-instagram"></a>
     <a href="#" class="fa fa-rss"></a>
 </footer>
-<!-- Vue.JS -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.min.js"></script>
-<script type="text/javascript" src="{% static 'personal/js/commentvue.js' %}"></script>
 </body>
 
 

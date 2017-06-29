@@ -2,16 +2,12 @@ from django.conf.urls import url, include
 from reservations import views
 from django.views.generic import DetailView
 from .models import Movie
-from django.contrib import admin
 from rest_framework import routers
 
-#routery są po to żeby automatyczne zdefiniować URL conf.
-router=routers.DefaultRouter()
+router = routers.DefaultRouter()
 router.register(r'comments', views.CommentViewSet)
 
-
 urlpatterns = [
-    # urls for logging in
     url(r'^accounts/$', views.accountsview, name="accounts"),
     url(r'^accounts/login/$', views.login_view, name="login"),
     url(r'^accounts/auth/$', views.auth_view, name="auth"),
@@ -31,8 +27,9 @@ urlpatterns = [
     url(r'^thegame', views.thegame_view, name="contact"),
     url(r'^ajax', views.ajaxview, name="ajax"),
     url(r'^vueopinion', views.vue_comment_view, name="ajax"),
-    url(r'^api/',include(router.urls)),
+    url(r'^api/', include(router.urls)),
     url(r'^evaluate', views.evaluateview, name="evaluate"),
+    url(r'^addcommentvue', views.comment, name="addcommentvue"),
     url(r'^evaluate/(?P<id>\d+)/$', views.evaluateview, name="evaluateupdate"),
     url(r'^$', views.homeview, name="home"),
     url(r'^home/$', views.homeview, name="home1"),

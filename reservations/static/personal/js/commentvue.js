@@ -1,10 +1,17 @@
-Vue.config.delimiters = ["[[", "]]"]
+Vue.config.delimiters = ["[[", "]]"];
 
 
-var demo = new Vue({
+document.onload = function () {
+    console.log("Here");
+    var demo = new Vue({
         el: "#app",
         data: {
-            'comments': []//pusty array na commenty
+            author:"",
+            seans:"",
+            mark:"",
+            opinion:"",
+            'comments': [],  //pusty array na commenty,
+            message: "Our message"
         },
         methods: {
             addComment: function () {
@@ -15,11 +22,13 @@ var demo = new Vue({
                     commentmark: this.mark.trim()
                 };
                 window.alert("dodajesz komentarz");
+
                 this.$http.post('http://127.0.0.1:8000/api/comments/', newComment);
             },
             clearContents: function (element) {
                 element.value = '';
-            },
+            }
+            ,
             removeComment: function (index) {
                 this.$http.delete('http://127.0.0.1:8000/api/comments/'.concat(this.comments[index].id));
                 this.comments.splice(index, 1);
@@ -33,5 +42,8 @@ var demo = new Vue({
                     console.log(response);
                 });
         }
-    })
-;
+    });
+};
+
+
+

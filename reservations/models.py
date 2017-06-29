@@ -78,17 +78,6 @@ class Screening(models.Model):
         hour = self.get_view_hour_display()
         return str(day) + "\t" + str(hour) + "\t" + str(self.movie)
 
-
-# class User(models.Model):
-#     name = models.CharField(max_length=50)
-#
-#     class Meta:
-#         verbose_name_plural = "users"
-#
-#     def __str__(self):
-#         return self.name
-
-
 class Ticket(models.Model):
     screening = models.ForeignKey(Screening)
     user = models.ForeignKey(User)

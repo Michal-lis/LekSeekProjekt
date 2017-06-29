@@ -171,8 +171,35 @@ def vue_comment_view(request):
     return HttpResponse(html.render())
 
 
+def comment(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        seans = data['seans']
+        seansik = Movie.objects.get(title=seans)
+        Evaluation.objects.create(
+            author=data['author'],
+            opinion=data['opinion'],
+            mark=data['mark'],
+            seans=seansik,
+        )
+        return HttpResponse('')
+    else:
+        response = HttpResponse()
+        response['Content-Type'] = "application/json"
+
+        def transform(comment):
+            return {
+                'author': comment.author,
+                'mark': comment.mark,
+                'opinion': comment.opinion,
+                'timestamp': comment.timestamp.strftime('%d,%m, %b %Y'),
+            }
+
+        response.write(json.dumps([transform(comment) for comment in Evaluation.objects.all()]))
+        return response
+
+
 class CommentViewSet(viewsets.ModelViewSet):
-    # tutaj tworzony jest endpoint pozwalający wyświetlać komentarze
     queryset = Evaluation.objects.all()
     serializer_class = CommentsSerializer
 

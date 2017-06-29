@@ -6,7 +6,8 @@
             <h2>Logging in.</h2>
         </div>
         <form action="/accounts/auth/" method="post">
-            {% csrf_token %}<!--Metodą post dostaniemy się do adresu URL accounts/auth/, który wykorzystuje następnie metodę z view-->
+            {% csrf_token %}
+            <!--Metodą post dostaniemy się do adresu URL accounts/auth/, który wykorzystuje następnie metodę z view-->
             <label for="username">User name:</label>
             <input type="text" name="username" value="" id="username">
             <label for="password">Password:</label>

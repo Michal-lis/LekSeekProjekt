@@ -78,9 +78,10 @@ class Screening(models.Model):
         hour = self.get_view_hour_display()
         return str(day) + "\t" + str(hour) + "\t" + str(self.movie)
 
+
 class Ticket(models.Model):
-    screening = models.ForeignKey(Screening,on_delete=models.CASCADE)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    screening = models.ForeignKey(Screening, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     seat = models.CharField(max_length=100)
 
     class Meta:
@@ -100,7 +101,7 @@ class Evaluation(models.Model):
         (6, "******"),
     )
     opinion = models.TextField(max_length=1000)
-    seans = models.ForeignKey(Movie, default=1,on_delete=models.CASCADE)
+    seans = models.ForeignKey(Movie, default=1, on_delete=models.CASCADE)
     author = models.TextField(max_length=100, default="Anonymous")
     mark = models.IntegerField(choices=MARK_CHOICES, default=6)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -120,6 +121,7 @@ class Evaluation(models.Model):
         list_display = ('__str__', 'text', 'mark', 'seans')
         list_filter = ('timestamp', 'author')
 
+
 class Evaluations(models.Model):
     MARK_CHOICES = (
         (1, "*"),
@@ -130,7 +132,101 @@ class Evaluations(models.Model):
         (6, "******"),
     )
     opinion = models.TextField(max_length=1000)
-    seans = models.ForeignKey(Movie, default=1,on_delete=models.CASCADE)
+    seans = models.ForeignKey(Movie, default=1, on_delete=models.CASCADE)
+    author = models.TextField(max_length=100, default="Anonymous")
+    mark = models.IntegerField(choices=MARK_CHOICES, default=6)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "evaluations"
+        ordering = ('-timestamp',)
+
+    def __str__(self):
+        return "Opinion by " + str(self.author) + " from " + str(self.timestamp)
+
+    @permalink
+    def get_absolute_url(self):
+        return ('django.views.generic.list_detail.object_detail', None, {'object_id': self.id})
+
+    class EvaluationAdmin(admin.ModelAdmin):
+        list_display = ('__str__', 'text', 'mark', 'seans')
+        list_filter = ('timestamp', 'author')
+
+
+# playing with models of evaluations
+class Evaluations1(models.Model):
+    MARK_CHOICES = (
+        (1, "*"),
+        (2, "**"),
+        (3, "***"),
+        (4, "****"),
+        (5, "*****"),
+        (6, "******"),
+    )
+    opinion = models.TextField(max_length=1000)
+    seans = models.ForeignKey(Movie, default=1, on_delete=models.CASCADE)
+    author = models.TextField(max_length=100, default="Anonymous")
+    mark = models.IntegerField(choices=MARK_CHOICES, default=6)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "evaluations"
+        ordering = ('-timestamp',)
+
+    def __str__(self):
+        return "Opinion by " + str(self.author) + " from " + str(self.timestamp)
+
+    @permalink
+    def get_absolute_url(self):
+        return ('django.views.generic.list_detail.object_detail', None, {'object_id': self.id})
+
+    class EvaluationAdmin(admin.ModelAdmin):
+        list_display = ('__str__', 'text', 'mark', 'seans')
+        list_filter = ('timestamp', 'author')
+
+
+class Evaluations2(models.Model):
+    MARK_CHOICES = (
+        (1, "*"),
+        (2, "**"),
+        (3, "***"),
+        (4, "****"),
+        (5, "*****"),
+        (6, "******"),
+    )
+    opinion = models.TextField(max_length=1000)
+    seans = models.ForeignKey(Movie, default=1, on_delete=models.CASCADE)
+    author = models.TextField(max_length=100, default="Anonymous")
+    mark = models.IntegerField(choices=MARK_CHOICES, default=6)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "evaluations"
+        ordering = ('-timestamp',)
+
+    def __str__(self):
+        return "Opinion by " + str(self.author) + " from " + str(self.timestamp)
+
+    @permalink
+    def get_absolute_url(self):
+        return ('django.views.generic.list_detail.object_detail', None, {'object_id': self.id})
+
+    class EvaluationAdmin(admin.ModelAdmin):
+        list_display = ('__str__', 'text', 'mark', 'seans')
+        list_filter = ('timestamp', 'author')
+
+
+class Evaluations3(models.Model):
+    MARK_CHOICES = (
+        (1, "*"),
+        (2, "**"),
+        (3, "***"),
+        (4, "****"),
+        (5, "*****"),
+        (6, "******"),
+    )
+    opinion = models.TextField(max_length=1000)
+    seans = models.ForeignKey(Movie, default=1, on_delete=models.CASCADE)
     author = models.TextField(max_length=100, default="Anonymous")
     mark = models.IntegerField(choices=MARK_CHOICES, default=6)
     timestamp = models.DateTimeField(auto_now_add=True)

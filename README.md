@@ -3,4 +3,4 @@ A simple Django application for cinemas written for the sake of recruitment proc
 Available: ticket reservation, viewing available films.
 Tech used: Python Django, Javascript + jquery, CSS, HTML, Bootstrap.
 
-![Screenshot](screenshot.png)
+![Screenshot](lekseek.png)

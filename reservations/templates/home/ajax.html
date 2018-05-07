@@ -2,19 +2,6 @@
 
 {% block nav %}
     <script type="text/javascript" language="JavaScript">
-        {#            var update_holder = $('#update-holder');#}
-        {#            var most_recent = update_holder.find("div:first");#}
-        {#            $getJSON("/evaluate/" + most_recent.attr('id') + "/",#}
-        {#                fucntion(data){#}
-        {#                jQuery.each(data,function () {#}
-        {#                    $("#update-holder").prepend('<div id="'#}
-        {#                        +this.pk +'">'+this.fields.author#}
-        {#                        +this.fields.timestamp#}
-        {#                        +this.fields.opinion#}
-        {#                        +'<div class="clear"></div>'#}
-        {#                    );#}
-        {#                })#}
-        {#Tutaj metoda na dodawanie pojedynczego ostatniego komentarza przy pomocy jQuery biorąc id ostatniego komentarza ale coś nie działa :( #}
         function clearContents(element) {
             element.value = '';
         }
@@ -49,8 +36,6 @@
                             $("#update-holder").prepend("<div id='"
                                 + our.pk + "'><br/>"
                                 + our.fields.author
-{#                                + " on "#}
-{#                                + our.fields.timestamp#}
                                 + '  has just written:<br/>"'
                                 + our.fields.opinion
                                 + '"<br/></div>');

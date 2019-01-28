@@ -6,4 +6,4 @@ Requirements: login, authorization, ticket reservation, viewing available films.
 
 Tech used: Python Django, Javascript + jquery, AJAX, CSS, HTML, Bootstrap, Jinja.
 
-This is my first Django project, I built mainly with the help of Python Web Development with Django (Developer's Library) by Jeff Forcier and https://code.djangoproject.com/wiki/Tutorials.
+This is my first Django project, I built it mainly with the help of Python Web Development with Django (Developer's Library) by Jeff Forcier and https://code.djangoproject.com/wiki/Tutorials.
